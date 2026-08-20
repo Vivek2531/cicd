@@ -22,7 +22,7 @@ jobs:
       
   Security-checks:
     runs-on: runner-1
-    needs: compile
+    needs: Compile
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -48,6 +48,7 @@ jobs:
         run: gitleaks detect source . -r gitleaks-report.json -f json
   Testing:
     runs-on: runner-1
+    needs: Security-checks
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
