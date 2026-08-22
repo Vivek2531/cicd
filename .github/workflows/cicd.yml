@@ -8,7 +8,7 @@ jobs:
   Compile:
     runs-on: runner-1
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
@@ -96,8 +96,8 @@ jobs:
     runs-on: runner-1
     needs: Build-project-sonar-scan
     steps:
-    
-      - name: 
+      - uses: actions/checkout@v4
+      - name: Downloading the artifact
         uses: actions/download-artifact@v8
         with:
           name: app-jar
@@ -118,6 +118,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
+          context: .
           push: true
           tags: user/app:latest
 
